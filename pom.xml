@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- プロジェクトの基本情報 -->
+    <modelVersion>4.0.0</modelVersion> <!-- MavenのPOMモデルバージョン -->
+    <groupId>com.example</groupId> <!-- プロジェクトのグループID -->
+    <artifactId>apiGateway</artifactId> <!-- プロジェクトのアーティファクトID -->
+    <packaging>jar</packaging> <!-- 出力形式（ここではJARファイル） -->
+    <version>1.0-SNAPSHOT</version> <!-- プロジェクトのバージョン -->
+    <name>apiGateway</name> <!-- プロジェクト名 -->
+    <url>http://maven.apache.org</url> <!-- プロジェクトのURL -->
+
+    <!-- 依存関係の設定 -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId> <!-- JUnitのグループID -->
+            <artifactId>junit</artifactId> <!-- JUnitのアーティファクトID -->
+            <version>3.8.1</version> <!-- JUnitのバージョン -->
+            <scope>test</scope> <!-- テストスコープでのみ使用 -->
+        </dependency>
+    </dependencies>
+
+    <!-- ビルド設定 -->
+    <build>
+        <plugins>
+            <!-- Javaコンパイル設定 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- Maven Compiler Pluginのバージョン -->
+                <configuration>
+                    <source>11</source> <!-- Javaのソースコードバージョン -->
+                    <target>11</target> <!-- Javaのターゲットバージョン -->
+                </configuration>
+            </plugin>
+
+            <!-- 実行可能JARの設定 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version> <!-- Maven Jar Pluginのバージョン -->
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.example.App</mainClass> <!-- メインクラスの指定 -->
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
