@@ -1,5 +1,5 @@
-# OpenJDKのランタイムを使用
-FROM openjdk:11-jdk-slim
+# 最新のDebianベースのOpenJDK 21イメージを使用
+FROM eclipse-temurin:21-jdk
 
 # 必要なツールをインストール
 RUN apt update && apt install -y \
