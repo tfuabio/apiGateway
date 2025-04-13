@@ -11,7 +11,8 @@ RUN apt update && apt install -y \
     bash-completion \
     && apt clean
 
-# 非rootユーザーを作成して切り替え
+# 非rootユーザー（user）を作成して切り替え
+# TODO: userはパスワードなしのためデプロイ時は注意が必要
 RUN useradd -m -s /bin/bash user && \
     echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
