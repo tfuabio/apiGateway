@@ -27,6 +27,3 @@ CMD ["/bin/bash"]
 
 # エイリアスを設定
 RUN echo "alias ll='ls -lha'" >> ~/.bash_aliases
-
-# bashのプロンプトにGitの情報が表示されるようにカスタマイズ
-# wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -O /usr/share/bash-completion/completions/git-prompt.sh
