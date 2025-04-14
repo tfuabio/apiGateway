@@ -1,4 +1,7 @@
 {
   // ビルド設定を自動的に更新する
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  // デフォルトのインデントをスペース4つに設定
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true
 }
