@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         // サーバー起動
-        final ResourceConfig rc = new ResourceConfig().packages("com.example");
+        final ResourceConfig rc = new ResourceConfig().packages("com.example.resources");
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
         System.out.printf("Server started at %s\nPress enter to stop it...\n", BASE_URI);
 
