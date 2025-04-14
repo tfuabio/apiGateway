@@ -71,12 +71,36 @@ $ code ~/.ssh/id_ed25519.pub
 
 3. GitHubのSettings＞SSH and GPG keysを開き、コピーしておいた公開鍵を追加する。
 
+## 実行（サーバー起動）方法
+```
+$ mvn exec:java
+```
+上記コマンドでサーバーが起動する。
+http://localhost:8080/
+
+補足：
+サーバー起動時にsrc/main/java/com/example/resources配下のリソースクラスを読み込んでいる。SampleResourceクラスのgetSampleMessage()の場合、以下コマンドでリクエストすることができる。
+```
+$ curl -i http://localhost:8080/sample
+```
+
+## テストケースの一括実行
+```
+$ mvn test
+```
+
+特定のテストクラスを実行
+```
+$ mvn test -Dtest=SampleResourceTest
+```
+
 ## ビルド方法
 ```
 $ mvn clean package
 ```
+ビルドを行うとtargetディレクトリにjarファイルが生成される。
 
-## 実行方法
+## ビルド成果物の実行方法
 ```
 $ java -jar target/apiGateway-1.0-SNAPSHOT.jar
 ```

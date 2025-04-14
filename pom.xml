@@ -29,6 +29,14 @@
             <scope>test</scope> <!-- テストスコープでのみ使用 -->
         </dependency>
 
+        <!-- JUnit Jupiter -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.3</version> <!-- 最新の安定バージョン -->
+            <scope>test</scope>
+        </dependency>
+
         <!-- Jersey -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
@@ -89,6 +97,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Exec Maven Plugin: mvn exec:javaで実行可能にする -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version> <!-- 正しいバージョンを指定 -->
+                <configuration>
+                    <mainClass>com.example.Main</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
