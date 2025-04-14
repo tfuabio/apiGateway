@@ -9,42 +9,86 @@
     <name>apiGateway</name> <!-- プロジェクト名 -->
     <url>http://maven.apache.org</url> <!-- プロジェクトのURL -->
 
+    <!-- 共通バージョンの定義 -->
+    <properties>
+        <java.version>11</java.version> <!-- Javaのバージョン -->
+        <jersey.version>2.41</jersey.version> <!-- Jerseyのバージョン -->
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version> <!-- Maven Compiler Pluginのバージョン -->
+        <maven.jar.plugin.version>3.2.2</maven.jar.plugin.version> <!-- Maven Jar Pluginのバージョン -->
+        <maven.shade.plugin.version>3.4.1</maven.shade.plugin.version> <!-- Maven Shade Pluginのバージョン -->
+    </properties>
+
     <!-- 依存関係の設定 -->
     <dependencies>
+
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId> <!-- JUnitのグループID -->
             <artifactId>junit</artifactId> <!-- JUnitのアーティファクトID -->
             <version>3.8.1</version> <!-- JUnitのバージョン -->
             <scope>test</scope> <!-- テストスコープでのみ使用 -->
         </dependency>
+
+        <!-- Jersey -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
     </dependencies>
 
     <!-- ビルド設定 -->
     <build>
         <plugins>
-            <!-- Javaコンパイル設定 -->
+            <!-- Javaコンパイラプラグイン: ソースコードとターゲットのJavaバージョンを指定 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- Maven Compiler Pluginのバージョン -->
+                <version>${maven.compiler.plugin.version}</version> <!-- Maven Compiler Pluginのバージョン -->
                 <configuration>
-                    <source>11</source> <!-- Javaのソースコードバージョン -->
-                    <target>11</target> <!-- Javaのターゲットバージョン -->
+                    <source>${java.version}</source> <!-- ソースコードのJavaバージョン -->
+                    <target>${java.version}</target> <!-- ターゲットのJavaバージョン -->
                 </configuration>
             </plugin>
 
-            <!-- 実行可能JARの設定 -->
+            <!-- JARファイル生成プラグイン: 実行可能JARを作成 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version> <!-- Maven Jar Pluginのバージョン -->
+                <version>${maven.jar.plugin.version}</version> <!-- Maven Jar Pluginのバージョン -->
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.App</mainClass> <!-- メインクラスの指定 -->
+                            <mainClass>com.example.Main</mainClass> <!-- メインクラスを指定 -->
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+
+            <!-- シェードプラグイン: 依存関係を統合した単一のJARを作成 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven.shade.plugin.version}</version> <!-- Maven Shade Pluginのバージョン -->
+                <executions>
+                    <execution>
+                        <phase>package</phase> <!-- パッケージフェーズで実行 -->
+                        <goals>
+                            <goal>shade</goal> <!-- シェード処理を実行 -->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
