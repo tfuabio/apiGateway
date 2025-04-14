@@ -1,0 +1,7 @@
+{
+  // 推奨されるVSCodeの拡張機能
+  "recommendations": [
+    // Extension Pack for Java
+    "vscjava.vscode-java-pack"
+  ]
+}

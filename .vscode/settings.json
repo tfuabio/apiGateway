@@ -1,0 +1,4 @@
+{
+  // ビルド設定を自動的に更新する
+  "java.configuration.updateBuildConfiguration": "automatic"
+}
