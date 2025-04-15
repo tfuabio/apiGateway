@@ -1,7 +1,8 @@
-# jerseyApp
+# apiGateway
 
 ## 概要
-- Jerseyアプリケーションの実行・開発環境を構築する方法を記載。
+本アプリケーションはJersey/Grizzlyを利用したバックエンドサーバーとなる。
+本readmeは開発環境の構築および動作確認方法について記載した。
 
 ## 前提
 - 開発PCに以下をインストールしていること。
@@ -9,6 +10,7 @@
   - VSCode
 - VSCodeに以下の拡張機能をインストールしていること。
   - Remote Development
+- GitHubからクローンできること。
 - Gitの改行コード設定を`input`にしていること。
   ```
   git config --global core.autocrlf input
