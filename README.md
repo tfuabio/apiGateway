@@ -9,7 +9,7 @@
   - Docker
   - VSCode
 - VSCodeに以下の拡張機能をインストールしていること。
-  - Remote Development
+  - Dev Container
 - GitHubからクローンできること。
 - Gitの改行コード設定を`input`にしていること。
   ```
