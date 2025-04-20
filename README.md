@@ -31,22 +31,6 @@ $ code apiGateway
 
 ![Image](https://github.com/user-attachments/assets/a24ee3b8-6855-47e4-93a9-dd4663d5f927)
 
-4. 「ワークスペースに構成を追加する」を選択する。
-
-![Image](https://github.com/user-attachments/assets/ad8e261a-d715-4246-bfcc-9d38422a7108)
-
-5. 「'Dockerfile'から」を選択する。
-
-![Image](https://github.com/user-attachments/assets/f75634d0-d36b-445e-8081-6b42091872c9)
-
-6. 何もチェックせずに「OK」をクリックする。
-
-![Image](https://github.com/user-attachments/assets/4871988e-1409-4164-97e3-a6e365c42601)
-
-7. 何もチェックせずに「OK」をクリックする。
-
-![Image](https://github.com/user-attachments/assets/79925cbc-ccb1-4201-90e4-30f9d7e982bd)
-
 ▼補足
 コンテナのビルドが開始され、自動的にコンテナでVSCodeが再度開く。
 Ctrl/Command + Jでターミナルを開き、
