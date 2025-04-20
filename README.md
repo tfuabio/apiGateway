@@ -28,14 +28,23 @@ $ code apiGateway
 ```
 2. VSCodeのコマンドパレット（WindowsではCtrl + Shift + P、MacではCommand + Shift + P）を開く。
 3. `reopen container`と検索し、「開発コンテナー:コンテナーで再度開く」（Dev Containers: Reopen in Container）を選択する。
+
 ![Image](https://github.com/user-attachments/assets/a24ee3b8-6855-47e4-93a9-dd4663d5f927)
+
 4. 「ワークスペースに構成を追加する」を選択する。
+
 ![Image](https://github.com/user-attachments/assets/ad8e261a-d715-4246-bfcc-9d38422a7108)
+
 5. 「'Dockerfile'から」を選択する。
+
 ![Image](https://github.com/user-attachments/assets/f75634d0-d36b-445e-8081-6b42091872c9)
+
 6. 何もチェックせずに「OK」をクリックする。
+
 ![Image](https://github.com/user-attachments/assets/4871988e-1409-4164-97e3-a6e365c42601)
+
 7. 何もチェックせずに「OK」をクリックする。
+
 ![Image](https://github.com/user-attachments/assets/79925cbc-ccb1-4201-90e4-30f9d7e982bd)
 
 ▼補足
