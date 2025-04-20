@@ -28,6 +28,6 @@
 	"runArgs": ["--name", "apiGateway"],
 
 	// マウントするディレクトリを指定
-	"workspaceFolder": "/workspace/apiGateway",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace/apiGateway,type=bind,consistency=cached"
+	"workspaceFolder": "/workspaces/apiGateway",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/apiGateway,type=bind"
 }
