@@ -68,13 +68,13 @@ $ code ~/.ssh/id_ed25519.pub
 
 ## 実行（サーバー起動）方法
 ```
-$ mvn exec:java
+$ mvn compile exec:java
 ```
 上記コマンドでサーバーが起動する。
-http://localhost:8080/
 
 補足：
-サーバー起動時にsrc/main/java/com/example/resources配下のリソースクラスを読み込んでいる。SampleResourceクラスのgetSampleMessage()の場合、以下コマンドでリクエストすることができる。
+サーバー起動時にsrc/main/java/com/example/resources配下のリソースクラスを読み込んでいる。
+SampleResourceクラスのgetSampleMessage()の場合、以下コマンドでリクエストすることができる。
 ```
 $ curl -i http://localhost:8080/sample
 ```
