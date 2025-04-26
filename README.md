@@ -1,10 +1,30 @@
 # apiGateway
 
-## 概要
-本アプリケーションはJersey/Grizzlyを利用したバックエンドサーバーとなる。
-本readmeは開発環境の構築および動作確認方法について記載した。
+## 1. 概要
+このリポジトリはDocker/VSCodeを用いてJersey/GrizzlyによるREST APIサーバーを構築することを想定している。
+ここでは開発環境構築や開発中の動作確認方法について記載する。
 
-## 前提
+▼補足
+REST APIとは・・
+- 簡単に言うと、Webアプリケーション同士が、REST（Representational State Transfer）というHTTPを使った共通のルールに基づいて、データをやり取りするためのインターフェース（API）
+- RESTの原則に基づいて設計されたWebサービスを「RESTful Webサービス」という
+
+Jerseyとは・・
+- RESTful Webサービスを構築するためのJavaのフレームワーク
+- JAX-RS (Java API for RESTful Web Services) のリファレンス実装であり、REST APIを簡単に構築する機能を提供
+- 主に以下のような機能が提供できる
+  - HTTPリクエスト/レスポンスの処理
+  - JSONやXMLなどのデータフォーマットのシリアライズ/デシリアライズ
+  - エラーハンドリングやフィルタリングのサポート
+
+Grizzlyとは・・
+- 軽量で高性能なHTTPサーバーを提供するJavaのライブラリ
+- 非同期I/Oをサポートしており、スケーラブルなサーバーを構築するのに適している
+- Grizzlyは単体でHTTPサーバーとして動作するが、Jerseyと組み合わせることでREST APIサーバーとして利用されることが多い
+
+## 2. 開発環境構築方法
+
+### 2.1. 前提
 - 開発PCに以下をインストールしていること。
   - Docker
   - VSCode
@@ -19,94 +39,163 @@
   ▼補足
   `input`の場合、チェックアウト時に変換は行わず、コミット時にはCRLFからLFに変換される。
 
+### 2.2. 手順
+1. このリポジトリを任意の場所にクローンし、VSCodeで開く。
+  ```
+  $ git clone git@github.com:tfuabio/apiGateway.git
+  $ code apiGateway
+  ```
+2. VSCodeのウィンドウ左下の「><」ボタンをクリックする。
+3. 「コンテナーで開く」を選択する。
+  ▼補足
+  上記を行うと、Dockerfileとdevcontainer.jsonに基づいてコンテナのビルドが開始される。
+  ビルドが完了すると自動的にコンテナ環境でVSCodeが開く。
+4. 後述のGit設定を行う。
 
-## 環境構築手順（記載中）
-1. 本リポジトリを任意の場所でcloneし、VSCodeで開く。
-```
-$ git clone git@github.com:tfuabio/apiGateway.git
-$ code apiGateway
-```
-2. VSCodeのコマンドパレット（WindowsではCtrl + Shift + P、MacではCommand + Shift + P）を開く。
-3. `reopen container`と検索し、「開発コンテナー:コンテナーで再度開く」（Dev Containers: Reopen in Container）を選択する。
+### 2.3. 開発環境（コンテナ）の閉じ方
+1. 「><」ボタンをクリックする。
+2. 「フォルダーをローカルで再度開く」を選択する。
 
-![Image](https://github.com/user-attachments/assets/a24ee3b8-6855-47e4-93a9-dd4663d5f927)
+### 2.4. 開発環境（コンテナ）の開き方
+1. 「><」ボタンをクリックする。
+2. 「コンテナーで再度開く」を選択する。
 
-▼補足
-コンテナのビルドが開始され、自動的にコンテナでVSCodeが再度開く。
-Ctrl/Command + Jでターミナルを開き、
-```
-$ cat /etc/os-release
-```
-を実行して以下のように表示されればOK。
-```
-PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
-NAME="Debian GNU/Linux"
-VERSION_ID="11"
-VERSION="11 (bullseye)"
-VERSION_CODENAME=bullseye
-ID=debian
-HOME_URL="https://www.debian.org/"
-SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/"
-```
-
-▼コンテナの閉じ方と次回からの開き方
-（記載中）
-
-### Git設定
-1. コンテナ内で新規キーペアを生成する。
-```
-$ ssh-keygen -t ed25519
-```
-
+### 2.5. Git設定
+1. コンテナ内で新規キーペアを生成する。 
+  下記を実行して、Enterを3回くらい叩けばOK
+  ```
+  $ ssh-keygen -t ed25519
+  ```
 2. 生成された公開鍵を開いてコピーする。
+  ```
+  $ code ~/.ssh/id_ed25519.pub
+  ```
+3. GitHub設定の「SSH and GPG keys」を開き、コピーしておいた公開鍵を追加する。
+
+## 3. 開発中の動作確認
+以下、記載のコマンドはコンテナを開いた上で、VSCodeのターミナル（`Ctrl＋J`）から実行すること。
+- コンパイル
+  ```
+  mvn compile
+  ```
+- 実行（サーバー起動）
+  ```
+  mvn exec:java
+  ```
+
+  ▼補足
+  コンパイルと実行を一緒に行うこともできる。
+  ```
+  mvn compile exec:java
+  ```
+  実行すると以下のルートエンドポイントが有効になる。
+  http://localhost:8080/
+
+  `Ctrl+C`でサーバー停止できる。
+- `curl`コマンドでのAPIレスポンス確認
+  サンプルAPI
+  ```
+  curl -i http://localhost:8080/sample
+  ```
+
+  下記レスポンスが返れば正常に動作しているはず。
+  ```
+  HTTP/1.1 200 OK
+  Content-Type: text/plain
+  Content-Length: 34
+
+  Hello, this is a sample resource!
+  ```
+
+  ▼補足
+  src/main/java/com/example/resources配下のリソースクラスを読み込む。
+  上記サンプルAPIは`SampleResource`クラスに`getSampleMessage()`として実装されている。
+
+- ユニットテスト（UT）の実行
+  ```
+  mvn test
+  ```
+
+  ▼補足
+  `src/test/java/com/example`配下のテストクラスに実装されたテストケース(`@Test`がついたメソッド)が一括で実行される。
+
+- ビルド方法
+  ```
+  $ mvn clean package
+  ```
+  上記を実行すると、targetディレクトリ配下にビルド成果物としてjarファイルが生成される。
+
+- jarの実行方法
+  ```
+  $ java -jar target/apiGateway-1.0-SNAPSHOT.jar
+  ```
+
+## 4. デプロイ向けメモ（記載中
+
+### 4.1. デプロイ用コンテナイメージのビルド
+Dockerfile.prodを使用して「api-gateway-image」イメージ（デプロイ対象想定）をビルドできる。
 ```
-$ code ~/.ssh/id_ed25519.pub
+docker build -f Dockerfile.prod -t api-gateway-image .
 ```
 
-3. GitHubのSettings＞SSH and GPG keysを開き、コピーしておいた公開鍵を追加する。
+### 4.2. 各種動作チェックコマンド
+- コンテナ作成
+  「api-gateway-image」イメージを下に「api-gateway-container」を作成
+  ```
+  docker create -p 8080:8080 --name api-gateway-container api-gateway-image
+  ```
 
-## 実行（サーバー起動）方法
-```
-$ mvn compile exec:java
-```
-上記コマンドでサーバーが起動する。
+- コンテナ起動
+  ```
+  docker start api-gateway-container
+  ```
 
-補足：
-サーバー起動時にsrc/main/java/com/example/resources配下のリソースクラスを読み込んでいる。
-SampleResourceクラスのgetSampleMessage()の場合、以下コマンドでリクエストすることができる。
-```
-$ curl -i http://localhost:8080/sample
-```
+  ▼補足
+  コンテナ起動中にAPIを叩けばレスポンスが返ってくるはず
+  ```
+  $ curl -i http://localhost:8080/sample
+  HTTP/1.1 200 OK
+  Content-Type: text/plain
+  Content-Length: 34
 
-## テストケースの一括実行
-```
-$ mvn test
-```
+  Hello, this is a sample resource!
+  ```
 
-特定のテストクラスを実行
-```
-$ mvn test -Dtest=SampleResourceTest
-```
+- コンテナ停止
+  ```
+  docker stop api-gateway-container
+  ```
 
-## ビルド方法
-```
-$ mvn clean package
-```
-ビルドを行うとtargetディレクトリにjarファイルが生成される。
+- コンテナ削除
+  ```
+  docker rm api-gateway-container
+  ```
 
-## ビルド成果物の実行方法
-```
-$ java -jar target/apiGateway-1.0-SNAPSHOT.jar
-```
+- 起動中のコンテナを確認
+  ```
+  docker ps
+  ```
+
+- コンテナのシェルに入る
+  ```
+  docker exec -it api-gateway-container /bin/bash
+  ```
+
+- コンテナのシェルから抜ける
+  ```
+  exit
+  ```
 
 ## 備考
-Mavenでのプロジェクト作成時コマンド
+- Mavenでのプロジェクト作成時コマンド
+  ```
+  mvn archetype:generate \
+    -DgroupId=com.example \
+    -DartifactId=backend-server \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DinteractiveMode=false
+  ```
 
-```
-mvn archetype:generate \
-  -DgroupId=com.example \
-  -DartifactId=backend-server \
-  -DarchetypeArtifactId=maven-archetype-quickstart \
-  -DinteractiveMode=false
-```
+## TODO
+- サーバーのログをファイル出力させる
+- docker-compose.ymlでコンテナビルドできるようにする

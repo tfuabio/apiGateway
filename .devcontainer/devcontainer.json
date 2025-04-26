@@ -19,13 +19,21 @@
 	// "postCreateCommand": "cat /etc/os-release",
 
 	// Configure tool-specific properties.
-	// "customizations": {},
+	"customizations": {
+		"vscode": {
+			// VSCodeの拡張機能
+			"extensions": [
+				"mhutchie.git-graph", // Git Graph
+				"vscjava.vscode-java-pack" // Extension Pack for Java
+			]
+		}
+	},
 
 	// コンテナのユーザーを指定
 	// "remoteUser": "user",
 
 	// 生成されるコンテナ名を固定（デフォルトはランダム）
-	"runArgs": ["--name", "apiGateway"],
+	"runArgs": ["--name", "api-gateway-dev-container"],
 
 	// マウントするディレクトリを指定
 	"workspaceFolder": "/workspaces/apiGateway",
