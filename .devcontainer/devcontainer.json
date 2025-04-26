@@ -29,13 +29,10 @@
 		}
 	},
 
-	// コンテナのユーザーを指定
-	// "remoteUser": "user",
-
 	// 生成されるコンテナ名を固定（デフォルトはランダム）
 	"runArgs": ["--name", "api-gateway-dev-container"],
 
 	// マウントするディレクトリを指定
 	"workspaceFolder": "/workspaces/apiGateway",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/apiGateway,type=bind"
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/apiGateway,type=bind,consistency=cached"
 }
