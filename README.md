@@ -4,7 +4,7 @@
 このリポジトリはDocker/VSCodeを用いてJersey/GrizzlyによるREST APIサーバーを構築することを想定している。
 ここでは開発環境構築や開発中の動作確認方法について記載する。
 
-▼補足
+▼補足  
 REST APIとは・・
 - 簡単に言うと、Webアプリケーション同士が、REST（Representational State Transfer）というHTTPを使った共通のルールに基づいて、データをやり取りするためのインターフェース（API）
 - RESTの原則に基づいて設計されたWebサービスを「RESTful Webサービス」という
@@ -35,8 +35,7 @@ Grizzlyとは・・
   ```
   git config --global core.autocrlf input
   ```
-
-  ▼補足
+  ▼補足  
   `input`の場合、チェックアウト時に変換は行わず、コミット時にはCRLFからLFに変換される。
 
 ### 2.2. 手順
@@ -47,7 +46,7 @@ Grizzlyとは・・
   ```
 2. VSCodeのウィンドウ左下の「><」ボタンをクリックする。
 3. 「コンテナーで再度開く」を選択する。
-  ▼補足
+  ▼補足  
   上記を行うと、Dockerfileとdevcontainer.jsonに基づいてコンテナのビルドが開始される。
   ビルドが完了すると自動的にコンテナ環境でVSCodeが開く。
 4. 後述のGit設定を行う。
@@ -78,22 +77,20 @@ Grizzlyとは・・
   ```
   mvn exec:java
   ```
-
-  ▼補足
+  ▼補足  
   コンパイルと実行を一緒に行うこともできる。
   ```
   mvn compile exec:java
   ```
   実行すると以下のルートエンドポイントが有効になる。
   http://localhost:8080/
-
+  
   `Ctrl+C`でサーバー停止できる。
 - `curl`コマンドでのAPIレスポンス確認
   サンプルAPI
   ```
   curl -i http://localhost:8080/sample
   ```
-
   下記レスポンスが返れば正常に動作しているはず。
   ```
   HTTP/1.1 200 OK
@@ -102,8 +99,7 @@ Grizzlyとは・・
 
   Hello, this is a sample resource!
   ```
-
-  ▼補足
+  ▼補足  
   src/main/java/com/example/resources配下のリソースクラスを読み込む。
   上記サンプルAPIは`SampleResource`クラスに`getSampleMessage()`として実装されている。
 
@@ -111,42 +107,34 @@ Grizzlyとは・・
   ```
   mvn test
   ```
-
-  ▼補足
+  ▼補足  
   `src/test/java/com/example`配下のテストクラスに実装されたテストケース(`@Test`がついたメソッド)が一括で実行される。
-
 - ビルド方法
   ```
   $ mvn clean package
   ```
   上記を実行すると、targetディレクトリ配下にビルド成果物としてjarファイルが生成される。
-
 - jarの実行方法
   ```
   $ java -jar target/apiGateway-1.0-SNAPSHOT.jar
   ```
-
 ## 4. デプロイ向けメモ（記載中
-
 ### 4.1. デプロイ用コンテナイメージのビルド
 Dockerfile.prodを使用して「api-gateway-image」イメージ（デプロイ対象想定）をビルドできる。
 ```
 docker build -f Dockerfile.prod -t api-gateway-image .
 ```
-
 ### 4.2. 各種動作チェックコマンド
 - コンテナ作成
   「api-gateway-image」イメージを下に「api-gateway-container」を作成
   ```
   docker create -p 8080:8080 --name api-gateway-container api-gateway-image
   ```
-
 - コンテナ起動
   ```
   docker start api-gateway-container
   ```
-
-  ▼補足
+  ▼補足  
   コンテナ起動中にAPIを叩けばレスポンスが返ってくるはず
   ```
   $ curl -i http://localhost:8080/sample
@@ -156,32 +144,26 @@ docker build -f Dockerfile.prod -t api-gateway-image .
 
   Hello, this is a sample resource!
   ```
-
 - コンテナ停止
   ```
   docker stop api-gateway-container
   ```
-
 - コンテナ削除
   ```
   docker rm api-gateway-container
   ```
-
 - 起動中のコンテナを確認
   ```
   docker ps
   ```
-
 - コンテナのシェルに入る
   ```
   docker exec -it api-gateway-container /bin/bash
   ```
-
 - コンテナのシェルから抜ける
   ```
   exit
   ```
-
 ## 備考
 - Mavenでのプロジェクト作成時コマンド
   ```
@@ -191,7 +173,6 @@ docker build -f Dockerfile.prod -t api-gateway-image .
     -DarchetypeArtifactId=maven-archetype-quickstart \
     -DinteractiveMode=false
   ```
-
 ## TODO
 - サーバーのログをファイル出力させる
 - docker-compose.ymlでコンテナビルドできるようにする
