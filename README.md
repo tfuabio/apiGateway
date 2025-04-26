@@ -43,7 +43,7 @@ Grizzlyとは・・
 1. このリポジトリを任意の場所にクローンし、VSCodeで開く。
   ```
   $ git clone git@github.com:tfuabio/apiGateway.git
-  $ code apiGateway
+  $ code -r apiGateway
   ```
 2. VSCodeのウィンドウ左下の「><」ボタンをクリックする。
 3. 「コンテナーで開く」を選択する。
