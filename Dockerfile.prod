@@ -1,10 +1,10 @@
 # ベースのコンテナイメージ
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jdk-jammy
 
 # 必要なツールをインストール
-RUN apt update && apt install -y \
+RUN apt-get  update && apt-get  install -y  --no-install-recommends \
     maven \
-    && apt clean
+    && apt-get clean
 
 # 作業ディレクトリを設定
 WORKDIR /app
