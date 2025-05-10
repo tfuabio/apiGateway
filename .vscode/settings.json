@@ -1,7 +1,11 @@
 {
   // ビルド設定を自動的に更新する
   "java.configuration.updateBuildConfiguration": "automatic",
+
   // デフォルトのインデントをスペース4つに設定
   "editor.tabSize": 4,
-  "editor.insertSpaces": true
+  "editor.insertSpaces": true,
+  
+  // 拡張機能「Language Support for Java(TM) by Red Hat」による使用状況送信を行わない
+  "redhat.telemetry.enabled": false
 }
